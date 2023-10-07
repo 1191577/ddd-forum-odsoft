@@ -2,6 +2,14 @@ plugins {
     id "com.github.node-gradle.node" version "7.0.1"
 }
 
+task runAPITests {
+    doLast{
+        println 'finished running API tests'
+    }
+}
+
+runAPITests.dependsOn npm_run_testApi
+
 task BuildSuccess
 {
     doLast{
@@ -10,5 +18,45 @@ task BuildSuccess
 }
 
 BuildSuccess.dependsOn npm_run_build
+
+task runUnitTests{
+    doLast{
+        println 'finished running unit tests'
+    }
+}
+
+runUnitTests.dependsOn npm_run_testUnit
+
+task generateUnitTestsCoverageReport{
+    doLast{
+        print 'Finished generating unit tests coverage report'
+
+    }
+}
+
+npm_run_testWithCoverage.dependsOn runUnitTests
+
+generateUnitTestsCoverageReport.dependsOn npm_run_testWithCoverage
+
+task generateAPITestsCoverageReport {
+        doLast{
+        print 'Finished generating api tests coverage report'
+    }
+}
+
+npm_run_testApiWithCoverage.dependsOn runAPITests
+
+generateAPITestsCoverageReport.dependsOn npm_run_testApiWithCoverage
+
+
+
+
+
+
+   
+
+
+
+
 
 

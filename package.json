@@ -22,9 +22,11 @@
     "prestart": "npm run migrate:prod",
     "start": "node dist/index",
     "test": "jest",
-    "test:dev": "jest --watchAll",
-    "testWithCoverage": "jest --coverage --coverageReporters=\"text\" --coverageReporters=\"html\" --coverageReporters=\"json\"",
-    "test:api": "npm run db:delete:dev && npm run db:create:dev && npm run migrate:dev && jest --coverage --coverageReporters=\"html\" --runInBand --testPathPattern=api"
+    "test:dev": "npm run db:delete:dev && npm run db:create:dev && npm run migrate:dev && jest --watchAll",
+    "testWithCoverage": "jest --testPathIgnorePatterns=api --coverage --coverageReporters=\"text\" --coverageReporters=\"html\" --coverageReporters=\"json\"",
+    "testApi": "npm run db:delete:dev && npm run db:create:dev && npm run migrate:dev && jest --runInBand --testPathPattern=api",
+    "testApiWithCoverage": "npm run db:delete:dev && npm run db:create:dev && npm run migrate:dev && jest --coverage --coverageReporters=\"html\" --testPathPattern=api",
+    "testUnit": "npm run test -- --testPathIgnorePatterns=api"
   },
   "husky": {
     "hooks": {

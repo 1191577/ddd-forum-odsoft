@@ -140,6 +140,7 @@ Examples of using the API (without authentication, using postman)
 
   The existing tests verify some services in the domain layer. The domain layer has no dependency on the other layers, so there is no need for mocking. The tests can be executed without any dependencies (e.g., database, etc.)
 
+
 ### How to Debug
 
   - start the services with *docker-compose up*
@@ -189,3 +190,26 @@ Examples of using the API (without authentication, using postman)
   **3. After Running Tests**
 
   Stop the backend by hitting Ctrl+C in the terminal where the backend is running.
+
+**4.API Tests VS Unit Tests**
+
+* **Scope**:
+
+  - **Unit Tests**: Verify small code units in isolation.
+  - **API Tests**: Validate interactions and behavior of APIs at higher system levels.
+* **Isolation**:
+  - **Unit Tests**: Highly isolated, no external dependencies.
+  - **API Tests**: May depend on external services or components.
+
+* **Purpose**:
+  - **Unit Tests**: Ensure individual code units work correctly.
+  - **API Tests**: Validate system functionality and integration.
+* **Speed**:
+  - **Unit Tests:** Faster due to isolation.
+  - **API Tests:** Slower due to external interactions.
+* **Coverage**:
+  - **Unit Tests**: High code coverage at unit level.
+  - **API Tests**: Comprehensive coverage of system behavior.
+* **Maintenance**:
+  - **Unit Tests**: Easier to maintain, less prone to breaking.
+  - **API Tests**: Require more maintenance, sensitive to system changes.
