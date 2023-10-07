@@ -1,0 +1,21 @@
+@startuml
+
+skin rose
+
+title "Messages - Sequence Diagram"
+
+actor HttpClient
+database IPostRepo
+
+HttpClient -> PostsRouter : GET /posts/popular
+PostsRouter -> GetPopularPostsController : execute(request, response)
+GetPopularPostsController -> GetPopularPosts : execute(dto : GetPopularPostRequestsDTO)
+GetPopularPosts -> IPostRepo : getPopularPosts()
+IPostRepo --> GetPopularPosts : Either<AppError.UnexpectedError,Result<PostDetails[]>>
+GetPopularPosts --> GetPopularPostsController : result =  Result.ok<PostDetails[]>(posts)
+loop for post in result
+  GetPopularPostsController -> PostDetailsMap : toDto(post)
+end
+GetPopularPostsController --> PostsRouter : GetPopularPostsResponseDTO
+PostsRouter --> HttpClient : 200 OK { GetPopularPostsResponseDTO }
+@enduml
